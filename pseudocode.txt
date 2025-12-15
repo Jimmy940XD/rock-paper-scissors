@@ -13,8 +13,17 @@ Create function getComputerChoice().
     ELSE
         Return "scissors".
     ENDIF
-SET order of hierarchy for choices.
-SET players' score.
-COMPARE choices from computer and user.
-DETERMINE winner depending on hierarchy.
-ADD point to winner's score.
+SET players' score to 0.
+Create function playRound().
+    COMPARE choices from computer and user.
+    IF one is "paper" and the other is "scissors" THEN
+        ADD 1 to winner's score ("scissors").
+        Return "Scissors win!".
+    ELSE IF one is "rock" and the other is "paper" THEN
+        ADD 1 to winner's score ("paper").
+        Return "Paper wins!".
+    ELSE IF one is "rock" and the other is "scissors" THEN
+        ADD 1 to winner's score ("rock").
+        Return "Rock wins!".
+    ELSE
+        Return "It's a draw! Go again.".

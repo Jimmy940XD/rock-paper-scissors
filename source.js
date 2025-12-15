@@ -1,10 +1,21 @@
 "use strict";
 
+function switchChoice(choice) {
+    switch (choice) {
+        case "rock":
+            return 1;
+        case "paper":
+            return 0;
+        case "scissors":
+            return -1;
+    }
+}
+
 function getComputerChoice() {
-    let choice = 3 * Math.random();
-    if (choice < 3 && choice >= 2) {
+    let choice = Math.floor(3 * Math.random());
+    if (choice === 2) {
         return "rock";
-    } else if (choice < 2 && choice >= 1) {
+    } else if (choice === 1) {
         return "paper";
     } else {
         return "scissors";
@@ -16,8 +27,17 @@ function getHumanChoice() {
     return choice;
 }
 
+function playRound(humanChoice, computerChoice) {
+    humanChoice = switchChoice(humanChoice.toLowerCase())
+    computerChoice = switchChoice(computerChoice)
+    if (humanChoice > computerChoice || humanChoice < computerChoice) {
+        // something is wrong with the condition. fix it!
+    }
+}
+
 let humanScore = 0;
 let computerScore = 0;
+let humanChoice = getHumanChoice();
+let computerChoice = getComputerChoice();
 
-
-console.log(getHumanChoice())
+playRound(humanChoice, computerChoice)
