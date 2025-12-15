@@ -1,0 +1,20 @@
+GET choice from user.
+Create function getHumanChoice().
+    GET a string from user.
+    Return string.
+GET choice from computer.
+Create function getComputerChoice().
+    GET a float bigger than or equal to 0 and less than 1.
+    MULTIPLY float by three to get new number between 0 and 3 (latter excluded).
+    IF number is less than 3 and bigger than or equal to 2 THEN
+        Return "rock".
+    ELSE IF number is less than 2 and bigger than or equal to 1 THEN
+        Return "paper".
+    ELSE
+        Return "scissors".
+    ENDIF
+SET order of hierarchy for choices.
+SET players' score.
+COMPARE choices from computer and user.
+DETERMINE winner depending on hierarchy.
+ADD point to winner's score.
