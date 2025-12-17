@@ -1,16 +1,5 @@
 "use strict";
 
-function switchChoice(choice) {
-    switch (choice) {
-        case "rock":
-            return 1;
-        case "paper":
-            return 0;
-        case "scissors":
-            return -1;
-    }
-}
-
 function getComputerChoice() {
     let choice = Math.floor(3 * Math.random());
     if (choice === 2) {
@@ -27,17 +16,54 @@ function getHumanChoice() {
     return choice;
 }
 
-function playRound(humanChoice, computerChoice) {
-    humanChoice = switchChoice(humanChoice.toLowerCase())
-    computerChoice = switchChoice(computerChoice)
-    if (humanChoice > computerChoice || humanChoice < computerChoice) {
-        // something is wrong with the condition. fix it!
+function capitalize(word) {
+    return word.replace(word[0], word[0].toUpperCase());
+}
+
+function checkPlural(word) {
+    if (word !== "scissors") {
+        return "s";
+    }
+
+    return "";
+}
+
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound(humanChoice, computerChoice) {
+        humanChoice = humanChoice.toLowerCase();
+        if (humanChoice === computerChoice) {
+            return alert("It's a draw! Go again.");
+        } else {
+            if (
+                humanChoice === "rock" && computerChoice === "paper" ||
+                humanChoice === "paper" && computerChoice === "scissors" ||
+                humanChoice === "scissors" && computerChoice === "rock"
+            ) {
+                computerScore++;
+                let s = checkPlural(computerChoice);
+                return alert(`You lose! ${capitalize(computerChoice)} beat${s} ${humanChoice}.`);
+            } else {
+                humanScore++;
+                let s = checkPlural(humanChoice);
+                return alert(`You win! ${capitalize(humanChoice)} beat${s} ${computerChoice}.`);
+            }
+        }
+    }
+    
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+    
+    if (humanScore > computerScore) {
+        alert(`${humanScore}-${computerScore}, you win the game! Congrats!!`);
+    } else {
+        alert(`${humanScore}-${computerScore}, you've lost... Next time I guess.`);
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
-let humanChoice = getHumanChoice();
-let computerChoice = getComputerChoice();
-
-playRound(humanChoice, computerChoice)
+playGame();
