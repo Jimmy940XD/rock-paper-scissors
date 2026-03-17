@@ -53,14 +53,15 @@ function playGame() {
         }
     }
     
-    btn1 = document.createElement("button")
-    btn1.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()))
-    btn2 = document.createElement("button")
-    btn2.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()))
-    btn3 = document.createElement("button")
-    btn3.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()))
+    const btn1 = document.querySelector("#rock-button");
+    btn1.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()));
+    const btn2 = document.querySelector("#paper-button");
+    btn2.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()));
+    const btn3 = document.querySelector("#scissors-button");
+    btn3.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()));
 
-    resultDiv = document.createElement("div")
+    resultDiv = document.createElement("div");
+    txt = document.createTextNode(`Result: ${result}`);
     
     if (humanScore > computerScore) {
         alert(`${humanScore}-${computerScore}, you win the game! Congrats!!`);
