@@ -11,11 +11,6 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let choice = prompt("What will it be? Rock, paper, or scissors?", "");
-    return choice;
-}
-
 function capitalize(word) {
     return word.replace(word[0], word[0].toUpperCase());
 }
@@ -54,14 +49,16 @@ function playGame() {
     }
     
     const btn1 = document.querySelector("#rock-button");
-    btn1.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()));
+    btn1.addEventListener("click", () => playRound("Rock", getComputerChoice()));
     const btn2 = document.querySelector("#paper-button");
-    btn2.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()));
+    btn2.addEventListener("click", () => playRound("Paper", getComputerChoice()));
     const btn3 = document.querySelector("#scissors-button");
-    btn3.addEventListener("click", () => playRound(getHumanChoice(), getComputerChoice()));
+    btn3.addEventListener("click", () => playRound("Scissors", getComputerChoice()));
 
-    resultDiv = document.createElement("div");
-    txt = document.createTextNode(`Result: ${result}`);
+    const body = document.querySelector("body");
+    const resultDiv = document.createElement("div");
+    body.appendChild(resultDiv);
+
     
     if (humanScore > computerScore) {
         alert(`${humanScore}-${computerScore}, you win the game! Congrats!!`);
