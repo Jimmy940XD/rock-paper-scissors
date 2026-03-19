@@ -59,6 +59,11 @@ function playGame() {
     const resultDiv = document.createElement("div");
     body.appendChild(resultDiv);
 
+    const humanPara = document.createElement("p");
+    const computerPara = document.createElement("p");
+    humanPara.textContent = `Your score: ${humanScore}`;
+    computerPara.textContent = `Rival's score: ${computerScore}`;
+    resultDiv.append(humanPara, computerPara);
     
     if (humanScore > computerScore) {
         alert(`${humanScore}-${computerScore}, you win the game! Congrats!!`);
