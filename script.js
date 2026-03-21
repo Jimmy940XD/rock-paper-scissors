@@ -23,6 +23,14 @@ function checkPlural(word) {
     return "";
 }
 
+function checkResultDivIn(element) {
+    if (!document.querySelector(".result-div")) {
+            const resultDiv = document.createElement("div");
+            resultDiv.classList.add("result-div");
+            element.appendChild(resultDiv);
+    }
+}
+
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
@@ -48,16 +56,22 @@ function playGame() {
         }
     }
     
-    const btn1 = document.querySelector("#rock-button");
-    btn1.addEventListener("click", () => playRound("Rock", getComputerChoice()));
-    const btn2 = document.querySelector("#paper-button");
-    btn2.addEventListener("click", () => playRound("Paper", getComputerChoice()));
-    const btn3 = document.querySelector("#scissors-button");
-    btn3.addEventListener("click", () => playRound("Scissors", getComputerChoice()));
-
     const body = document.querySelector("body");
-    const resultDiv = document.createElement("div");
-    body.appendChild(resultDiv);
+    const btn1 = document.querySelector("#rock-button");
+    btn1.addEventListener("click", () => {
+        checkResultDivIn(body);
+        playRound("Rock", getComputerChoice());
+    });
+    const btn2 = document.querySelector("#paper-button");
+    btn2.addEventListener("click", () => {
+        checkResultDivIn(body);
+        playRound("Paper", getComputerChoice());
+    });
+    const btn3 = document.querySelector("#scissors-button");
+    btn3.addEventListener("click", () => {
+        checkResultDivIn(body);
+        playRound("Scissors", getComputerChoice());
+    });
 
     const humanPara = document.createElement("p");
     const computerPara = document.createElement("p");
