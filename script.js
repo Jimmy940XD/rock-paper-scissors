@@ -23,67 +23,73 @@ function checkPlural(word) {
     return "";
 }
 
-function checkResultDivIn(element) {
-    if (!document.querySelector(".result-div")) {
-            const resultDiv = document.createElement("div");
-            resultDiv.classList.add("result-div");
-            element.appendChild(resultDiv);
-    }
-}
-
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    const body = document.querySelector("body");
+
+    function checkResultDiv() {
+        if (!document.querySelector(".result-div")) {
+                const resultDiv = document.createElement("div");
+                resultDiv.classList.add("result-div");
+                body.appendChild(resultDiv);
+
+                const humanPara = document.createElement("p");
+                humanPara.classList.add("human-score");
+                const computerPara = document.createElement("p");
+                computerPara.classList.add("computer-score");
+                humanPara.textContent = `Your score: ${humanScore}`;
+                computerPara.textContent = `Rival's score: ${computerScore}`;
+                resultDiv.append(humanPara, computerPara);
+        }
+    }
 
     function playRound(humanChoice, computerChoice) {
+        const computerPara = document.querySelector(".computer-score");
+        const humanPara = document.querySelector(".human-score");
         humanChoice = humanChoice.toLowerCase();
         if (humanChoice === computerChoice) {
-            return alert("It's a draw! Go again.");
+            console.log("It's a draw!");
         } else {
             if (
                 humanChoice === "rock" && computerChoice === "paper" ||
                 humanChoice === "paper" && computerChoice === "scissors" ||
                 humanChoice === "scissors" && computerChoice === "rock"
             ) {
-                computerScore++;
-                let s = checkPlural(computerChoice);
-                return alert(`You lose! ${capitalize(computerChoice)} beat${s} ${humanChoice}.`);
+                computerPara.textContent = `Rival's score: ${++computerScore}`;
             } else {
-                humanScore++;
-                let s = checkPlural(humanChoice);
-                return alert(`You win! ${capitalize(humanChoice)} beat${s} ${computerChoice}.`);
+                humanPara.textContent = `Your score: ${++humanScore}`;
             }
+        }
+
+        if (humanScore === 5 || computerScore === 5) {
+            if (humanScore > computerScore) {
+                alert(`${humanScore}-${computerScore}, you win the game! Congrats!!`);
+            } else {
+                alert(`${humanScore}-${computerScore}, you've lost... Next time I guess.`);
+            }
+            humanScore = 0;
+            humanPara.textContent = `Your score: ${humanScore}`;
+            computerScore = 0;
+            computerPara.textContent = `Rival's score: ${computerScore}`;
         }
     }
     
-    const body = document.querySelector("body");
     const btn1 = document.querySelector("#rock-button");
     btn1.addEventListener("click", () => {
-        checkResultDivIn(body);
+        checkResultDiv();
         playRound("Rock", getComputerChoice());
     });
     const btn2 = document.querySelector("#paper-button");
     btn2.addEventListener("click", () => {
-        checkResultDivIn(body);
+        checkResultDiv();
         playRound("Paper", getComputerChoice());
     });
     const btn3 = document.querySelector("#scissors-button");
     btn3.addEventListener("click", () => {
-        checkResultDivIn(body);
+        checkResultDiv();
         playRound("Scissors", getComputerChoice());
     });
-
-    const humanPara = document.createElement("p");
-    const computerPara = document.createElement("p");
-    humanPara.textContent = `Your score: ${humanScore}`;
-    computerPara.textContent = `Rival's score: ${computerScore}`;
-    resultDiv.append(humanPara, computerPara);
-    
-    if (humanScore > computerScore) {
-        alert(`${humanScore}-${computerScore}, you win the game! Congrats!!`);
-    } else {
-        alert(`${humanScore}-${computerScore}, you've lost... Next time I guess.`);
-    }
 }
 
 playGame();
